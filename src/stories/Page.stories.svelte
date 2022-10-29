@@ -14,7 +14,9 @@
 />
 
 <Template let:args>
-    <Page {...args} on:login={args.onLogin} on:logout={args.onLogout} on:createAccount={args.onCreateAccount} />
+    <div class="container mx-auto">
+        <Page {...args} on:login={args.onLogin} on:logout={args.onLogout} on:createAccount={args.onCreateAccount} />
+    </div>
 </Template>
 
 <Story

@@ -8,16 +8,26 @@
     export let showExcerpt;
 
     export let size = 'md';
+
+    const colSpan = {
+        sm: ['col-span-12', 'col-span-12'],
+        md: ['col-span-3 order-2', 'col-span-9'],
+        lg: ['col-span-12', 'col-span-12']
+    };
+
+    const getColspan = () => {
+        return colSpan[size] || ['col-span-3', 'col-span-9'];
+    };
 </script>
 
 <a href={url} class="hover:underline">
-    <div class="flex flex-wrap justify-evenly">
+    <div class="grid overflow-hidden md grid-cols-12 auto-rows-auto gap-2">
         {#if size !== 'xs'}
-            <div class={`image-${size}`}>
-                <img src={img && img.startsWith('http') ? img : `/images/${img}`} alt="" />
+            <div class={`${getColspan()[0]}`}>
+                <img class={`image-${size}`} src={img && img.startsWith('http') ? img : `/images/${img}`} alt="" />
             </div>
         {/if}
-        <div class="item w-32 h-44 flex-grow p-4">
+        <div class={`${getColspan()[1]}`}>
             {#if size !== 'xs'}
                 <p style="color: #f9a1bc;" class="font-black">Ukraine</p>
             {/if}
@@ -37,9 +47,9 @@
 
 <style>
     .image-sm {
-        @apply w-44 my-auto;
+        @apply w-full h-full object-cover;
     }
     .image-md {
-        @apply w-full my-auto;
+        @apply w-full h-full object-cover;
     }
 </style>
